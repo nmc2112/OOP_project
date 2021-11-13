@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import com.example.oop_project.models.Order;
 import com.example.oop_project.models.roadDeliver;
 import com.example.oop_project.models.airDeliver;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,6 +26,12 @@ public class OrderListController implements Initializable {
     public static ObservableList list;
     @FXML
     private Button addBtn;
+
+    @FXML
+    private Button DeleteButton;
+
+    @FXML
+    private Button UpdateButton1;
 
     @FXML
     private TableColumn<Order, Double> cost;
@@ -143,6 +150,76 @@ public class OrderListController implements Initializable {
             default: break;
         }
         list.add(order);
+
+    }
+    @FXML
+    void deleteOrder(ActionEvent event) {
+        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        if(getSelectedOrder != null){
+            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete ?" , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert1.showAndWait();
+
+            if (alert1.getResult() == ButtonType.YES) {
+                list.remove(getSelectedOrder);
+
+//                table.setItems(list);
+
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Xóa thành công!!");
+
+                alert.show();
+            }
+
+        }else {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
+            alert.show();
+        }
+
+    }
+    @FXML
+    void updateOrder(ActionEvent event) {
+        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        if(getSelectedOrder == null) {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
+            alert.show();
+        }else {
+            getSelectedOrder.setSenderName(senderName1.getText());
+            getSelectedOrder.setReceiverName(receiverName1.getText());
+            getSelectedOrder.setReceivedAddress(receivedAddress1.getText());
+            getSelectedOrder.setType(type1.getValue());
+            getSelectedOrder.setDistance(Double.parseDouble(distance1.getText()));
+            getSelectedOrder.setItem(item1.getText());
+            getSelectedOrder.setWeight(Double.parseDouble(weight1.getText()));
+
+
+            table.refresh();
+
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setContentText("Cập nhật thành công!!");
+            alert.show();
+
+
+        }
+
+
+
+    }
+
+    public void selectOrderMouseClicked(MouseEvent mouseEvent) {
+        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        if(getSelectedOrder != null){
+            senderName1.setText(getSelectedOrder.getSenderName());
+            receiverName1.setText(getSelectedOrder.getReceiverName());
+            receivedAddress1.setText(getSelectedOrder.getReceivedAddress());
+            distance1.setText(String.valueOf((getSelectedOrder.getDistance())));
+            type1.setValue(getSelectedOrder.getType());
+            item1.setText(getSelectedOrder.getItem());
+            weight1.setText(String.valueOf(getSelectedOrder.getWeight()));
+
+        }
+
 
     }
 }
