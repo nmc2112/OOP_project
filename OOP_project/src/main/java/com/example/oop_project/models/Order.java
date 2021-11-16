@@ -81,4 +81,5 @@ public class Order {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 }

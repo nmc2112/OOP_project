@@ -1,7 +1,9 @@
 package com.example.oop_project.controllers;
 
 import com.example.oop_project.HelloApplication;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +22,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderListController implements Initializable {
-    public static ObservableList list;
+    public static ObservableList<Order> list;
     @FXML
     private Button addBtn;
 
@@ -32,6 +34,9 @@ public class OrderListController implements Initializable {
 
     @FXML
     private Button UpdateButton1;
+
+    @FXML
+    private Button findButton1;
 
     @FXML
     private TableColumn<Order, Double> cost;
@@ -49,7 +54,7 @@ public class OrderListController implements Initializable {
     private TableColumn<Order, String> senderName;
 
     @FXML
-    private TableView<?> table;
+    private TableView<Order> table;
 
     @FXML
     private TableColumn<Order, String> type;
@@ -88,6 +93,7 @@ public class OrderListController implements Initializable {
 
     @FXML
     private TextField weight1;
+
     @FXML
     void openAddDialog(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddOrderView.fxml"));
@@ -109,9 +115,9 @@ public class OrderListController implements Initializable {
         type1.getSelectionModel().selectFirst();
 
         list = FXCollections.observableArrayList(
-            new roadDeliver("chau", "dat", "ha noi", 10, "hang", 6),
+                new roadDeliver("chau", "dat", "ha noi", 10, "hang", 6),
 
-            new airDeliver("chau", "tung", "da nang", 20, "bim bim", 7)
+                new airDeliver("chau", "tung", "da nang", 20, "bim bim", 7)
         );
 
         cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
@@ -128,7 +134,7 @@ public class OrderListController implements Initializable {
     }
 
     public void addOrder(ActionEvent actionEvent) {
-        if(senderName1.getText() == ""
+        if (senderName1.getText() == ""
                 || receiverName1.getText() == ""
                 || receivedAddress1.getText() == ""
                 || distance1.getText() == ""
@@ -140,23 +146,25 @@ public class OrderListController implements Initializable {
             alert.show();
             return;
         }
-        switch (type1.getValue()){
+        switch (type1.getValue()) {
             case "Đường Bộ":
                 order = new roadDeliver(senderName1.getText(), receiverName1.getText(), receivedAddress1.getText(), Double.parseDouble(distance1.getText()), item1.getText(), Double.parseDouble(weight1.getText()));
                 break;
             case "Hàng Không":
                 order = new airDeliver(senderName1.getText(), receiverName1.getText(), receivedAddress1.getText(), Double.parseDouble(distance1.getText()), item1.getText(), Double.parseDouble(weight1.getText()));
                 break;
-            default: break;
+            default:
+                break;
         }
         list.add(order);
 
     }
+
     @FXML
     void deleteOrder(ActionEvent event) {
         Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
-        if(getSelectedOrder != null){
-            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete ?" , ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+        if (getSelectedOrder != null) {
+            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert1.showAndWait();
 
             if (alert1.getResult() == ButtonType.YES) {
@@ -170,21 +178,22 @@ public class OrderListController implements Initializable {
                 alert.show();
             }
 
-        }else {
+        } else {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
             alert.show();
         }
 
     }
+
     @FXML
     void updateOrder(ActionEvent event) {
         Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
-        if(getSelectedOrder == null) {
+        if (getSelectedOrder == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
             alert.show();
-        }else {
+        } else {
             getSelectedOrder.setSenderName(senderName1.getText());
             getSelectedOrder.setReceiverName(receiverName1.getText());
             getSelectedOrder.setReceivedAddress(receivedAddress1.getText());
@@ -204,12 +213,11 @@ public class OrderListController implements Initializable {
         }
 
 
-
     }
 
     public void selectOrderMouseClicked(MouseEvent mouseEvent) {
         Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
-        if(getSelectedOrder != null){
+        if (getSelectedOrder != null) {
             senderName1.setText(getSelectedOrder.getSenderName());
             receiverName1.setText(getSelectedOrder.getReceiverName());
             receivedAddress1.setText(getSelectedOrder.getReceivedAddress());
@@ -220,6 +228,35 @@ public class OrderListController implements Initializable {
 
         }
 
+
+    }
+
+    @FXML
+    void findOrder(ActionEvent event) {
+
+
+        // create a text input dialog
+        TextInputDialog td = new TextInputDialog("");
+
+        // setHeaderText
+        td.setHeaderText("Nhập tên muốn tìm kiếm");
+        td.setContentText("Họ Tên");
+        td.showAndWait();
+        String enterName = td.getEditor().getText();
+        if (enterName != "") {
+            ObservableList findedList = FXCollections.observableArrayList();
+            for (Order order1 : list) {
+                if ( order1.getReceiverName().equals(enterName.trim())) {
+                   findedList.add(order1);
+                }
+            }
+            table.setItems(findedList);
+            table.refresh();
+
+        } else {
+            table.setItems(list);
+            table.refresh();
+        }
 
     }
 }
