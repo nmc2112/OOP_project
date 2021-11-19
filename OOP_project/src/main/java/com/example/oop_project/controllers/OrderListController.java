@@ -39,6 +39,10 @@ public class OrderListController implements Initializable {
     private Button findButton1;
 
     @FXML
+    private TextField findTextField;
+
+
+    @FXML
     private TableColumn<Order, Double> cost;
 
     @FXML
@@ -93,6 +97,7 @@ public class OrderListController implements Initializable {
 
     @FXML
     private TextField weight1;
+
 
     @FXML
     void openAddDialog(ActionEvent event) throws IOException {
@@ -189,6 +194,7 @@ public class OrderListController implements Initializable {
     @FXML
     void updateOrder(ActionEvent event) {
         Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        Order order1;
         if (getSelectedOrder == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
@@ -233,16 +239,20 @@ public class OrderListController implements Initializable {
 
     @FXML
     void findOrder(ActionEvent event) {
+        String enterName = findTextField.getText();
 
 
-        // create a text input dialog
+ /*       // create a text input dialog
         TextInputDialog td = new TextInputDialog("");
 
         // setHeaderText
         td.setHeaderText("Nhập tên muốn tìm kiếm");
         td.setContentText("Họ Tên");
         td.showAndWait();
+
         String enterName = td.getEditor().getText();
+        
+  */
         if (enterName != "") {
             ObservableList findedList = FXCollections.observableArrayList();
             for (Order order1 : list) {

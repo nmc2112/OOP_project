@@ -39,7 +39,7 @@
             <Label layoutX="14.0" layoutY="219.0" prefHeight="26.0" prefWidth="93.0" text="Mặt hàng" />
             <TextField fx:id="weight1" layoutX="108.0" layoutY="269.0" prefHeight="26.0" prefWidth="224.0" />
             <Label layoutX="14.0" layoutY="266.0" prefHeight="26.0" prefWidth="93.0" text="Cân nặng" />
-            <Button fx:id="AddButton" layoutX="272.0" layoutY="439.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="THÊM" textFill="WHITE">
+            <Button fx:id="AddButton" layoutX="252.0" layoutY="439.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="THÊM" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -48,22 +48,23 @@
             <Label layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="93.0" text="Kiểu vận chuyển" />
             <TextField fx:id="distance1" layoutX="108.0" layoutY="319.0" prefHeight="26.0" prefWidth="224.0" />
             <Label layoutX="14.0" layoutY="316.0" prefHeight="26.0" prefWidth="93.0" text="Khoảng cách" />
-            <Button fx:id="DeleteButton" layoutX="180.0" layoutY="439.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #c4c41e;" text="XÓA" textFill="WHITE">
+            <Button fx:id="DeleteButton" layoutX="159.0" layoutY="439.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #c4c41e;" text="XÓA" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="UpdateButton1" layoutX="91.0" layoutY="439.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #1087d0;" text="CẬP NHẬT" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Button fx:id="findButton1" layoutY="439.0" mnemonicParsing="false" onAction="#findOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #d01ab5;" text="TÌM KIẾM" textFill="WHITE">
+            <Button fx:id="UpdateButton1" layoutX="68.0" layoutY="439.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #1087d0;" text="CẬP NHẬT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
+      <Button fx:id="findButton1" layoutX="955.0" layoutY="93.0" mnemonicParsing="false" onAction="#findOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #d01ab5;" text="TÌM KIẾM" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="findTextField" layoutX="1046.0" layoutY="93.0" prefHeight="26.0" prefWidth="224.0" />
    </children>
 </AnchorPane>
