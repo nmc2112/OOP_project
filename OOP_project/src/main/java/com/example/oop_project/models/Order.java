@@ -11,7 +11,6 @@ public class Order {
 	private String type;
 	
 	
-	
 	public Order(String senderName, String receiverName, String receivedAddress, double distance,String item,
 			double weight) {
 		super();
@@ -80,5 +79,9 @@ public class Order {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public double calculateCost(){
+		return 0;
 	}
 }
