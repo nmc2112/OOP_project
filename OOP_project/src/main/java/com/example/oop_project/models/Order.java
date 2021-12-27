@@ -78,6 +78,11 @@ public class Order {
 	}
 
 	public void setType(String type) {
+		if(type == "Đường Bộ"){
+			this.setCost(this.getDistance() * 20000 + this.getWeight() * 5000);
+		}else {
+			this.setCost(this.getDistance() * 100000 + this.getWeight() * 100000 + 200000);
+		}
 		this.type = type;
 	}
 
