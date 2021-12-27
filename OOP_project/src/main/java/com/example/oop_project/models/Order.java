@@ -82,5 +82,5 @@ public class Order {
 		this.type = type;
 	}
 
-//	public  double tinhCost(){return 0;}
+
 }

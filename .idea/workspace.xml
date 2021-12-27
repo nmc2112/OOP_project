@@ -6,23 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0510d91a-ad8e-4e93-ab28-d8b38e4848fe" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/OOP_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/OOP_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/controllers/OrderListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/controllers/OrderListController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/models/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/models/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/models/roadDeliver.java" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/src/main/java/com/example/oop_project/models/roadDeliver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/src/main/resources/com/example/oop_project/OrderListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/src/main/resources/com/example/oop_project/OrderListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/HelloApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/HelloApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/HelloController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/OrderListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/OrderListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/controllers/OrderListController.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/controllers/OrderListController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/airDeliver.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/airDeliver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/roadDeliver.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/com/example/oop_project/models/roadDeliver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OOP_project/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/OOP_project/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +36,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/OOP_project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -72,7 +56,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.HelloApplication">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.oop_project.HelloApplication" />
       <module name="Project OOP" />
       <extension name="coverage">
@@ -98,9 +82,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.HelloApplication" />
+      <item itemvalue="Application.Main" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -146,6 +144,7 @@
       <workItem from="1640578013364" duration="43000" />
       <workItem from="1640585619109" duration="17000" />
       <workItem from="1640585690180" duration="53000" />
+      <workItem from="1640585798372" duration="4250000" />
     </task>
     <servers />
   </component>
