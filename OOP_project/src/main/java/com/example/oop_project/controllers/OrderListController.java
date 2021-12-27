@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 public class OrderListController implements Initializable {
@@ -107,6 +108,11 @@ public class OrderListController implements Initializable {
     @FXML
     private Button btn_refresh;
 
+    @FXML
+    private Button btn_list;
+
+    @FXML
+    private Label lbl_sumOfCost;
 
 
     @Override
@@ -127,9 +133,13 @@ public class OrderListController implements Initializable {
 
         list = FXCollections.observableArrayList(
                 new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
+                new roadDeliver("Nguyễn Minh Ngọc", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 12, 25)),
+                new roadDeliver("Lương Phương Linh", "Đàm Tiến Đạt", "Nha Trang", 10, "Hàng", 6, LocalDate.of(2021, 12, 11)),
 
                 new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "Đà Nẵng", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
+
         ));
+
 
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         colDistance.setCellValueFactory(new PropertyValueFactory<>("distance"));
@@ -140,7 +150,6 @@ public class OrderListController implements Initializable {
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colItem.setCellValueFactory(new PropertyValueFactory<>("item"));
         colWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
-
         table.setItems(list);
 
     }
@@ -263,6 +272,7 @@ public class OrderListController implements Initializable {
                         if (or1.getSenderName().contains(findTextField.getText())) {
                             searchlist.add(or1);
                         }
+//                        if(or1.getDate().getMonth().toString().equals("JULY")) System.out.println("dat");
 
                     }
                     break;
@@ -296,11 +306,36 @@ public class OrderListController implements Initializable {
         table.setItems(searchlist); // hiện lên trên bảng list tìm
 
     }
-    
+
     // PHÀN CỦA ĐẠT
     @FXML
     void refreshAction(ActionEvent event) {
         warning.setText("");
         table.setItems(list);
     }
+
+// NÚT THỐNG KÊ DOANH THU
+    @FXML
+    void listAction(ActionEvent event) {
+        ObservableList<Order> searchlist =FXCollections.observableArrayList();
+        LocalDate currentdate = LocalDate.now();
+        Month currentMonth = currentdate.getMonth();
+        double sumOfCost=0;
+        for (Object or : list) {
+            warning.setText("");
+            Order ord = (Order) or; // duyệt ép kiểu
+            if(ord.getDate().getMonth().toString().equals(currentMonth.toString())) {
+                searchlist.add(ord);
+                sumOfCost+=ord.getCost();
+
+            }
+//
+
+        }
+        table.setItems(searchlist);
+        lbl_sumOfCost.setText("Tổng doanh thu:  "+sumOfCost);
+
+
+    }
+
 }
