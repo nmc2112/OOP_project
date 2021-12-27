@@ -184,7 +184,7 @@ public class OrderListController implements Initializable {
 
     @FXML
     void deleteOrder(ActionEvent event) {
-        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItems();
+        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder != null) {
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có muốn xóa không?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert1.showAndWait();
