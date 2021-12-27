@@ -18,13 +18,13 @@
               <columns>
                 <TableColumn fx:id="colReceiverName" prefWidth="111.0" text="Người Nhận" />
                   <TableColumn fx:id="colSenderName" prefWidth="123.0" resizable="false" text="Người Gửi" />
-                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="138.0" resizable="false" text="Địa Chỉ" />
-                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="145.0" resizable="false" text="Ngày Vận Chuyển" />
-                  <TableColumn fx:id="colDistance" prefWidth="134.0" resizable="false" text="Khoảng Cách(km)" />
-                  <TableColumn fx:id="colWeight" prefWidth="106.0" resizable="false" text="Cân Nặng(kg)" />
-                  <TableColumn fx:id="colItem" prefWidth="147.0" text="Mặt Hàng" />
-                  <TableColumn fx:id="colType" prefWidth="139.0" resizable="false" text="Kiểu Vận Chuyển" />
-                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="139.0" resizable="false" text="Tổng Giá Tiền" />
+                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="347.199951171875" resizable="false" text="Địa Chỉ" />
+                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="112.800048828125" resizable="false" text="Ngày Vận Chuyển" />
+                  <TableColumn fx:id="colDistance" prefWidth="112.0" resizable="false" text="Khoảng Cách(km)" />
+                  <TableColumn fx:id="colWeight" prefWidth="86.40008544921875" resizable="false" text="Cân Nặng(kg)" />
+                  <TableColumn fx:id="colItem" prefWidth="69.5999755859375" text="Mặt Hàng" />
+                  <TableColumn fx:id="colType" prefWidth="107.9998779296875" resizable="false" text="Kiểu Vận Chuyển" />
+                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="116.800048828125" resizable="false" text="Tổng Giá Tiền" />
               </columns>
             </TableView>
          </children>

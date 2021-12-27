@@ -184,7 +184,7 @@ public class OrderListController implements Initializable {
 
     @FXML
     void deleteOrder(ActionEvent event) {
-        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItems();
+        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder != null) {
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có muốn xóa không?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert1.showAndWait();
@@ -269,7 +269,7 @@ public class OrderListController implements Initializable {
                     for (Object or : list) {
                         warning.setText("");
                         Order or1 = (Order) or; // duyệt ép kiểu
-                        if (or1.getSenderName().contains(findTextField.getText())) {
+                        if (or1.getSenderName().toLowerCase().contains(findTextField.getText().toLowerCase())) {
                             searchlist.add(or1);
                         }
 //                        if(or1.getDate().getMonth().toString().equals("JULY")) System.out.println("dat");
