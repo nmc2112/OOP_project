@@ -112,7 +112,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.oop_project/com.example.oop_project.HelloApplication</mainClass>
+                            <mainClass>com.example.oop_project/com.example.oop_project.Man</mainClass>
                         </configuration>
                     </execution>
                 </executions>

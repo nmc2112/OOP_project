@@ -1,16 +1,10 @@
 package com.example.oop_project.controllers;
 
-import com.example.oop_project.HelloApplication;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import com.example.oop_project.models.Order;
@@ -18,10 +12,9 @@ import com.example.oop_project.models.roadDeliver;
 import com.example.oop_project.models.airDeliver;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class OrderListController implements Initializable {
@@ -43,31 +36,35 @@ public class OrderListController implements Initializable {
 
 
     @FXML
-    private TableColumn<Order, Double> cost;
+    private TableColumn<Order, Double> colCost;
 
     @FXML
-    private TableColumn<Order, Double> distance;
+    private TableColumn<Order, Double> colDistance;
 
     @FXML
-    private TableColumn<Order, String> receivedAddress;
+    private TableColumn<Order, String> colReceivedAddress;
 
     @FXML
-    private TableColumn<Order, String> receiverName;
+    private TableColumn<Order, String> colReceiverName;
 
     @FXML
-    private TableColumn<Order, String> senderName;
+    private TableColumn<Order, String> colSenderName;
 
     @FXML
     private TableView<Order> table;
 
     @FXML
-    private TableColumn<Order, String> type;
+    private TableColumn<Order, String> colType;
 
     @FXML
-    private TableColumn<Order, String> item;
+    private TableColumn<Order, String> colItem;
 
     @FXML
-    private TableColumn<Order, Double> weight;
+    private TableColumn<Order, Double> colWeight;
+
+
+    @FXML
+    private TableColumn<Order, LocalDate> colDate;
 
     @FXML
     private AnchorPane mainPain;
@@ -78,35 +75,28 @@ public class OrderListController implements Initializable {
     private Button AddButton;
 
     @FXML
-    private TextField distance1;
+    private TextField distance;
 
     @FXML
-    private TextField item1;
+    private TextField item;
 
     @FXML
-    private TextField receivedAddress1;
+    private TextField receivedAddress;
 
     @FXML
-    private TextField receiverName1;
+    private TextField receiverName;
 
     @FXML
-    private TextField senderName1;
+    private TextField senderName;
 
     @FXML
-    private ComboBox<String> type1;
+    private ComboBox<String> type;
 
     @FXML
-    private TextField weight1;
-
+    private DatePicker date;
 
     @FXML
-    void openAddDialog(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("AddOrderView.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
-        stage.show();
-    }
+    private TextField weight;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,48 +105,50 @@ public class OrderListController implements Initializable {
         table.setEditable(true);
 
         //init select combobox
-        type1.getItems().add("Đường Bộ");
-        type1.getItems().add("Hàng Không");
-        type1.getSelectionModel().selectFirst();
+        type.getItems().add("Đường Bộ");
+        type.getItems().add("Hàng Không");
+        type.getSelectionModel().selectFirst();
 
         list = FXCollections.observableArrayList(
-                new roadDeliver("chau", "dat", "ha noi", 10, "hang", 6),
+                new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
 
-                new airDeliver("chau", "tung", "da nang", 20, "bim bim", 7)
-        );
+                new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "Đà Nẵng", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
+        ));
 
-        cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
-        distance.setCellValueFactory(new PropertyValueFactory<>("distance"));
-        receivedAddress.setCellValueFactory(new PropertyValueFactory<>("receivedAddress"));
-        receiverName.setCellValueFactory(new PropertyValueFactory<>("receiverName"));
-        senderName.setCellValueFactory(new PropertyValueFactory<>("senderName"));
-        type.setCellValueFactory(new PropertyValueFactory<>("type"));
-        item.setCellValueFactory(new PropertyValueFactory<>("item"));
-        weight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
+        colDistance.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        colReceivedAddress.setCellValueFactory(new PropertyValueFactory<>("receivedAddress"));
+        colReceiverName.setCellValueFactory(new PropertyValueFactory<>("receiverName"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colSenderName.setCellValueFactory(new PropertyValueFactory<>("senderName"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colItem.setCellValueFactory(new PropertyValueFactory<>("item"));
+        colWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
 
         table.setItems(list);
 
     }
 
     public void addOrder(ActionEvent actionEvent) {
-        if (senderName1.getText() == ""
-                || receiverName1.getText() == ""
-                || receivedAddress1.getText() == ""
-                || distance1.getText() == ""
-                || type1.getValue() == ""
-                || item.getText() == ""
-                || weight1.getText() == "") {
+        if (senderName.getText() == ""
+            || receiverName.getText() == ""
+            || receivedAddress.getText() == ""
+            || distance.getText() == ""
+            || type.getValue() == ""
+            || item.getText() == ""
+            || weight.getText() == ""
+            || date.getValue() == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Bạn phải điền đầy đủ thông tin!");
             alert.show();
             return;
         }
-        switch (type1.getValue()) {
+        switch (type.getValue()) {
             case "Đường Bộ":
-                order = new roadDeliver(senderName1.getText(), receiverName1.getText(), receivedAddress1.getText(), Double.parseDouble(distance1.getText()), item1.getText(), Double.parseDouble(weight1.getText()));
+                order = new roadDeliver(senderName.getText(), receiverName.getText(), receivedAddress.getText(), Double.parseDouble(distance.getText()), item.getText(), Double.parseDouble(weight.getText()), date.getValue());
                 break;
             case "Hàng Không":
-                order = new airDeliver(senderName1.getText(), receiverName1.getText(), receivedAddress1.getText(), Double.parseDouble(distance1.getText()), item1.getText(), Double.parseDouble(weight1.getText()));
+                order = new airDeliver(senderName.getText(), receiverName.getText(), receivedAddress.getText(), Double.parseDouble(distance.getText()), item.getText(), Double.parseDouble(weight.getText()), date.getValue());
                 break;
             default:
                 break;
@@ -167,15 +159,13 @@ public class OrderListController implements Initializable {
 
     @FXML
     void deleteOrder(ActionEvent event) {
-        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItems();
         if (getSelectedOrder != null) {
-            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to delete ?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có muốn xóa không?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert1.showAndWait();
 
             if (alert1.getResult() == ButtonType.YES) {
                 list.remove(getSelectedOrder);
-
-//                table.setItems(list);
 
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setContentText("Xóa thành công!!");
@@ -185,7 +175,7 @@ public class OrderListController implements Initializable {
 
         } else {
             alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setContentText("bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
+            alert.setContentText("Bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
             alert.show();
         }
 
@@ -193,22 +183,27 @@ public class OrderListController implements Initializable {
 
     @FXML
     void updateOrder(ActionEvent event) {
-        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
-        Order order1;
+        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setContentText("bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
+            alert.setContentText("Bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
             alert.show();
         } else {
-            getSelectedOrder.setSenderName(senderName1.getText());
-            getSelectedOrder.setReceiverName(receiverName1.getText());
-            getSelectedOrder.setReceivedAddress(receivedAddress1.getText());
-            getSelectedOrder.setType(type1.getValue());
-            getSelectedOrder.setDistance(Double.parseDouble(distance1.getText()));
-            getSelectedOrder.setItem(item1.getText());
-            getSelectedOrder.setWeight(Double.parseDouble(weight1.getText()));
 
-
+            getSelectedOrder.setSenderName(senderName.getText());
+            getSelectedOrder.setReceiverName(receiverName.getText());
+            getSelectedOrder.setReceivedAddress(receivedAddress.getText());
+            getSelectedOrder.setType(type.getValue());
+            getSelectedOrder.setDistance(Double.parseDouble(distance.getText()));
+            getSelectedOrder.setItem(item.getText());
+            getSelectedOrder.setWeight(Double.parseDouble(weight.getText()));
+            switch (type.getValue()){
+                case "Đường Bộ":
+                    getSelectedOrder.setCost(getSelectedOrder.calculateCost("Đường Bộ")); break;
+                case "Hàng Không":
+                    getSelectedOrder.setCost(getSelectedOrder.calculateCost("Hàng Không")); break;
+            }
+            getSelectedOrder.setDate(date.getValue());
             table.refresh();
 
             alert.setAlertType(Alert.AlertType.INFORMATION);
@@ -224,13 +219,14 @@ public class OrderListController implements Initializable {
     public void selectOrderMouseClicked(MouseEvent mouseEvent) {
         Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder != null) {
-            senderName1.setText(getSelectedOrder.getSenderName());
-            receiverName1.setText(getSelectedOrder.getReceiverName());
-            receivedAddress1.setText(getSelectedOrder.getReceivedAddress());
-            distance1.setText(String.valueOf((getSelectedOrder.getDistance())));
-            type1.setValue(getSelectedOrder.getType());
-            item1.setText(getSelectedOrder.getItem());
-            weight1.setText(String.valueOf(getSelectedOrder.getWeight()));
+            senderName.setText(getSelectedOrder.getSenderName());
+            receiverName.setText(getSelectedOrder.getReceiverName());
+            receivedAddress.setText(getSelectedOrder.getReceivedAddress());
+            distance.setText(String.valueOf((getSelectedOrder.getDistance())));
+            type.setValue(getSelectedOrder.getType());
+            item.setText(getSelectedOrder.getItem());
+            weight.setText(String.valueOf(getSelectedOrder.getWeight()));
+            date.setValue(getSelectedOrder.getDate());
 
         }
 
@@ -238,7 +234,7 @@ public class OrderListController implements Initializable {
     }
 
     @FXML
-    void findOrder(ActionEvent event) {
+    void findOrderByName(ActionEvent event) {
         String enterName = findTextField.getText();
 
 
@@ -251,13 +247,13 @@ public class OrderListController implements Initializable {
         td.showAndWait();
 
         String enterName = td.getEditor().getText();
-        
+
   */
         if (enterName != "") {
             ObservableList findedList = FXCollections.observableArrayList();
-            for (Order order1 : list) {
-                if ( order1.getReceiverName().equals(enterName.trim())) {
-                   findedList.add(order1);
+            for (Order ord : list) {
+                if (ord.getReceiverName().equals(enterName.trim())) {
+                   findedList.add(ord);
                 }
             }
             table.setItems(findedList);

@@ -1,5 +1,8 @@
 package com.example.oop_project.models;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class Order {
 	private String senderName;
 	private String receiverName;
@@ -9,10 +12,11 @@ public class Order {
 	private double weight;
 	private String item;
 	private String type;
+	private LocalDate date;
 	
 	
 	public Order(String senderName, String receiverName, String receivedAddress, double distance,String item,
-			double weight) {
+			double weight, LocalDate date) {
 		super();
 		this.item = item;
 		this.senderName = senderName;
@@ -20,6 +24,7 @@ public class Order {
 		this.receivedAddress = receivedAddress;
 		this.distance = distance;
 		this.weight = weight;
+		this.date = date;
 	}
 	
 	
@@ -31,11 +36,9 @@ public class Order {
 	public String getItem() {
 		return item;
 	}
-
 	public void setItem(String item) {
 		this.item = item;
 	}
-
 	public String getSenderName() {
 		return senderName;
 	}
@@ -72,6 +75,8 @@ public class Order {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
+	public LocalDate getDate() {return date;}
+	public void setDate(LocalDate date) {this.date = date;}
 
 	public String getType() {
 		return type;
@@ -86,7 +91,11 @@ public class Order {
 		this.type = type;
 	}
 
-	public double calculateCost(){
-		return 0;
+	public double calculateCost(String type){
+		switch (type){
+			case "Đường Bộ": return this.getDistance() * 20000 + this.getWeight() * 5000;
+			case "Hàng Không": return this.getDistance() * 100000 + this.getWeight() * 100000 + 200000;
+			default: return 0;
+		}
 	}
 }
