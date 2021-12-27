@@ -29,7 +29,7 @@ public class OrderListController implements Initializable {
     private Button UpdateButton1;
 
     @FXML
-    private Button findButton1;
+    private Button btn_search;
 
     @FXML
     private TextField findTextField;
@@ -98,6 +98,17 @@ public class OrderListController implements Initializable {
     @FXML
     private TextField weight;
 
+    @FXML
+    private ComboBox<String> cb_search;
+
+    @FXML
+    private Label warning;
+
+    @FXML
+    private Button btn_refresh;
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -108,6 +119,11 @@ public class OrderListController implements Initializable {
         type.getItems().add("Đường Bộ");
         type.getItems().add("Hàng Không");
         type.getSelectionModel().selectFirst();
+
+        cb_search.getItems().add("Người gửi");
+        cb_search.getItems().add("Địa chỉ");
+        cb_search.getItems().add("Chi phí vận chuyển");
+//        cb_search.getSelectionModel().selectFirst();
 
         list = FXCollections.observableArrayList(
                 new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
@@ -233,36 +249,58 @@ public class OrderListController implements Initializable {
 
     }
 
+    // Phần của Đạt NÚT TÌM
     @FXML
-    void findOrderByName(ActionEvent event) {
-        String enterName = findTextField.getText();
+    void findOrder(ActionEvent event) {
+        ObservableList<Order> searchlist =FXCollections.observableArrayList();
+        if (cb_search.getValue() == null) warning.setText("Hãy điền trường cần tìm");
+        else {
+            switch (cb_search.getValue()) {
+                case "Người gửi":
+                    for (Object or : list) {
+                        warning.setText("");
+                        Order or1 = (Order) or; // duyệt ép kiểu
+                        if (or1.getSenderName().contains(findTextField.getText())) {
+                            searchlist.add(or1);
+                        }
 
+                    }
+                    break;
+                case "Địa chỉ":
+                    for (Object or : list) {
+                        warning.setText("");
+                        Order or1 = (Order) or;
+                        if (or1.getReceivedAddress().contains(findTextField.getText())) searchlist.add(or1);
 
- /*       // create a text input dialog
-        TextInputDialog td = new TextInputDialog("");
+                    }
+                    break;
+                case "Chi phí vận chuyển":
+                    try {
+                        double cost = Double.parseDouble(findTextField.getText());
 
-        // setHeaderText
-        td.setHeaderText("Nhập tên muốn tìm kiếm");
-        td.setContentText("Họ Tên");
-        td.showAndWait();
+                        for (Object or : list) {
+                            warning.setText("");
+                            Order or1 = (Order) or;
 
-        String enterName = td.getEditor().getText();
+                            if (or1.getCost() > Double.parseDouble(findTextField.getText())) searchlist.add(or1);
 
-  */
-        if (enterName != "") {
-            ObservableList findedList = FXCollections.observableArrayList();
-            for (Order ord : list) {
-                if (ord.getReceiverName().equals(enterName.trim())) {
-                   findedList.add(ord);
-                }
+                        }
+                    } catch (NumberFormatException e) {
+                        warning.setText("Giá trị không hợp lệ! Mời nhập lại.");
+                    }
+                    break;
+
             }
-            table.setItems(findedList);
-            table.refresh();
-
-        } else {
-            table.setItems(list);
-            table.refresh();
         }
 
+        table.setItems(searchlist); // hiện lên trên bảng list tìm
+
+    }
+    
+    // PHÀN CỦA ĐẠT
+    @FXML
+    void refreshAction(ActionEvent event) {
+        warning.setText("");
+        table.setItems(list);
     }
 }

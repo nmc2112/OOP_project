@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPane" fx:id="mainPain" prefHeight="762.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project.controllers.OrderListController">
+<AnchorPane id="anchorPane" fx:id="mainPain" prefHeight="762.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project.controllers.OrderListController">
    <children>
       <AnchorPane id="anchorPane" layoutX="301.0" layoutY="150.0" prefHeight="488.0" prefWidth="1171.0">
          <children>
@@ -49,14 +49,14 @@
             <DatePicker fx:id="date" layoutX="108.0" layoutY="413.0" prefHeight="31.0" prefWidth="150.0" />
          </children>
       </AnchorPane>
-      <Button fx:id="findButton1" layoutX="1308.0" layoutY="64.0" mnemonicParsing="false" onAction="#findOrderByName" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #d01ab5;" text="TÌM KIẾM" textFill="WHITE">
+      <Button fx:id="btn_find" layoutX="1294.0" layoutY="64.0" mnemonicParsing="false" onAction="#findOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #d01ab5;" text="TÌM KIẾM" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TextField fx:id="findTextField" layoutX="1068.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" />
-      <ComboBox fx:id="searchBy" layoutX="827.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" promptText="Tìm kiếm theo" />
-      <Label fx:id="warning" layoutX="827.0" layoutY="117.0" prefHeight="21.0" prefWidth="343.0" text="Hiện thông báo ở đây" textFill="RED" />
+      <TextField fx:id="findTextField" layoutX="1058.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" />
+      <ComboBox fx:id="cb_search" layoutX="827.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" promptText="Tìm kiếm theo" />
+      <Label fx:id="warning" layoutX="827.0" layoutY="101.0" prefHeight="21.0" prefWidth="343.0" textFill="RED" />
       <Button fx:id="AddButton" layoutX="209.0" layoutY="544.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="THÊM" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -68,6 +68,11 @@
          </font>
       </Button>
       <Button fx:id="UpdateButton1" layoutX="25.0" layoutY="544.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #1087d0;" text="CẬP NHẬT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_refresh" layoutX="1392.0" layoutY="64.0" mnemonicParsing="false" onAction="#refreshAction" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="TẢI LẠI" textFill="#f4f2f2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
