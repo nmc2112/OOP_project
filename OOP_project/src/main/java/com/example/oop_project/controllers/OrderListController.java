@@ -108,19 +108,7 @@ public class OrderListController implements Initializable {
     //hàm thêm order
     public void addOrder(ActionEvent actionEvent) {
         //check rỗng
-        if (senderName.getText() == ""
-                || receiverName.getText() == ""
-                || receivedAddress.getText() == ""
-                || distance.getText() == ""
-                || type.getValue() == ""
-                || item.getText() == ""
-                || weight.getText() == ""
-                || date.getValue() == null) {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setContentText("Bạn phải điền đầy đủ thông tin!");
-            alert.show();
-            return;
-        }
+        if (checkNull()) return;
 
         //check text field là số hay chữ
 
@@ -153,19 +141,7 @@ public class OrderListController implements Initializable {
             alert.show();
         } else {
             //check rỗng
-            if (senderName.getText() == ""
-                    || receiverName.getText() == ""
-                    || receivedAddress.getText() == ""
-                    || distance.getText() == ""
-                    || type.getValue() == ""
-                    || item.getText() == ""
-                    || weight.getText() == ""
-                    || date.getValue() == null) {
-                alert.setAlertType(Alert.AlertType.ERROR);
-                alert.setContentText("Bạn phải điền đầy đủ thông tin!");
-                alert.show();
-                return;
-            }
+            if (checkNull()) return;
 
             //check text field là số hay chữ
 
@@ -205,6 +181,23 @@ public class OrderListController implements Initializable {
             resetFields();
 
         }
+    }
+
+    private boolean checkNull() {
+        if (senderName.getText() == ""
+                || receiverName.getText() == ""
+                || receivedAddress.getText() == ""
+                || distance.getText() == ""
+                || type.getValue() == ""
+                || item.getText() == ""
+                || weight.getText() == ""
+                || date.getValue() == null) {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("Bạn phải điền đầy đủ thông tin!");
+            alert.show();
+            return true;
+        }
+        return false;
     }
 
     // Phần của Nguyễn Sơn Tùng 20198271
