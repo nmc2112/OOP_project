@@ -21,104 +21,56 @@ import java.util.*;
 public class OrderListController implements Initializable {
     public static ObservableList<Order> list;
     @FXML
-    private Button addBtn;
-
-    @FXML
-    private Button DeleteButton;
-
-    @FXML
-    private Button UpdateButton1;
-
-    @FXML
-    private Button btn_search;
-
-    @FXML
     private TextField findTextField;
-
-
     @FXML
     private TableColumn<Order, Double> colCost;
-
     @FXML
     private TableColumn<Order, Double> colDistance;
-
     @FXML
     private TableColumn<Order, String> colReceivedAddress;
-
     @FXML
     private TableColumn<Order, String> colReceiverName;
-
     @FXML
     private TableColumn<Order, String> colSenderName;
-
     @FXML
     private TableView<Order> table;
-
     @FXML
     private TableColumn<Order, String> colType;
-
     @FXML
     private TableColumn<Order, String> colItem;
-
     @FXML
     private TableColumn<Order, Double> colWeight;
-
-
     @FXML
     private TableColumn<Order, LocalDate> colDate;
-
-    @FXML
-    private AnchorPane mainPain;
-    Alert alert = new Alert(Alert.AlertType.NONE);
-    Order order;
-
-    @FXML
-    private Button AddButton;
-
     @FXML
     private TextField distance;
-
     @FXML
     private TextField item;
-
     @FXML
     private TextField receivedAddress;
-
     @FXML
     private TextField receiverName;
-
     @FXML
     private TextField senderName;
-
     @FXML
     private ComboBox<String> type;
-
     @FXML
     private DatePicker date;
-
     @FXML
     private TextField weight;
-
     @FXML
     private ComboBox<String> cb_search;
-
     @FXML
     private Label warning;
-
-    @FXML
-    private Button btn_refresh;
-
-    @FXML
-    private Button btn_list;
-
     @FXML
     private Label lbl_sumOfCost;
 
+    Alert alert = new Alert(Alert.AlertType.NONE);
+    Order order;
 
+    //hàm khởi tạo ban đầu của giao diện
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         table.setEditable(true);
 
         //init select combobox
@@ -129,18 +81,16 @@ public class OrderListController implements Initializable {
         cb_search.getItems().add("Người gửi");
         cb_search.getItems().add("Địa chỉ");
         cb_search.getItems().add("Chi phí vận chuyển");
-//        cb_search.getSelectionModel().selectFirst();
 
+        //init table
         list = FXCollections.observableArrayList(
-                new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
-                new roadDeliver("Nguyễn Minh Ngọc", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 12, 25)),
-                new roadDeliver("Lương Phương Linh", "Đàm Tiến Đạt", "Nha Trang", 10, "Hàng", 6, LocalDate.of(2021, 12, 11)),
+            new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
+            new roadDeliver("Nguyễn Minh Ngọc", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 12, 25)),
+            new roadDeliver("Lương Phương Linh", "Đàm Tiến Đạt", "Nha Trang", 10, "Hàng", 6, LocalDate.of(2021, 12, 11)),
 
-                new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "Đà Nẵng", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
+            new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "Đà Nẵng", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
 
-        ));
-
-
+            ));
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         colDistance.setCellValueFactory(new PropertyValueFactory<>("distance"));
         colReceivedAddress.setCellValueFactory(new PropertyValueFactory<>("receivedAddress"));
@@ -154,20 +104,27 @@ public class OrderListController implements Initializable {
 
     }
 
+    //Phần của Nguyễn Minh Châu 20198208
+    //hàm thêm order
     public void addOrder(ActionEvent actionEvent) {
+        //check rỗng
         if (senderName.getText() == ""
-            || receiverName.getText() == ""
-            || receivedAddress.getText() == ""
-            || distance.getText() == ""
-            || type.getValue() == ""
-            || item.getText() == ""
-            || weight.getText() == ""
-            || date.getValue() == null) {
+                || receiverName.getText() == ""
+                || receivedAddress.getText() == ""
+                || distance.getText() == ""
+                || type.getValue() == ""
+                || item.getText() == ""
+                || weight.getText() == ""
+                || date.getValue() == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Bạn phải điền đầy đủ thông tin!");
             alert.show();
             return;
         }
+
+        //check text field là số hay chữ
+
+        //thêm order dựa theo type là đường bộ hay hàng không
         switch (type.getValue()) {
             case "Đường Bộ":
                 order = new roadDeliver(senderName.getText(), receiverName.getText(), receivedAddress.getText(), Double.parseDouble(distance.getText()), item.getText(), Double.parseDouble(weight.getText()), date.getValue());
@@ -179,44 +136,44 @@ public class OrderListController implements Initializable {
                 break;
         }
         list.add(order);
-
+        alert.setAlertType(Alert.AlertType.INFORMATION);
+        alert.setContentText("Bạn đã thêm thành công!!");
+        alert.show();
+        resetFields();
     }
 
-    @FXML
-    void deleteOrder(ActionEvent event) {
-        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
-        if (getSelectedOrder != null) {
-            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có muốn xóa không?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert1.showAndWait();
-
-            if (alert1.getResult() == ButtonType.YES) {
-                list.remove(getSelectedOrder);
-
-                alert.setAlertType(Alert.AlertType.INFORMATION);
-                alert.setContentText("Xóa thành công!!");
-
-                alert.show();
-            }
-
-        } else {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setContentText("Bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
-            alert.show();
-        }
-
-    }
-
+    //hàm update order
     @FXML
     void updateOrder(ActionEvent event) {
+        //lấy ra order được chọn từ bảng
         Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder == null) {
             alert.setAlertType(Alert.AlertType.ERROR);
             alert.setContentText("Bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
             alert.show();
         } else {
-            switch (type.getValue()){
+            //check rỗng
+            if (senderName.getText() == ""
+                    || receiverName.getText() == ""
+                    || receivedAddress.getText() == ""
+                    || distance.getText() == ""
+                    || type.getValue() == ""
+                    || item.getText() == ""
+                    || weight.getText() == ""
+                    || date.getValue() == null) {
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setContentText("Bạn phải điền đầy đủ thông tin!");
+                alert.show();
+                return;
+            }
+
+            //check text field là số hay chữ
+
+            //xóa đối tượng cũ từ bảng và thêm đối tượng mới với các trường đã được sửa từ đối tượng cũ bị xóa
+            Order newOrder = null;
+            switch (type.getValue()) {
                 case "Đường Bộ":
-                    getSelectedOrder = new roadDeliver(
+                    newOrder = new roadDeliver(
                             senderName.getText(),
                             receiverName.getText(),
                             receivedAddress.getText(),
@@ -224,41 +181,90 @@ public class OrderListController implements Initializable {
                             item.getText(),
                             Double.parseDouble(weight.getText()),
                             date.getValue()
-                        ); break;
+                    );
+                    break;
                 case "Hàng Không":
-                    getSelectedOrder = new airDeliver (senderName.getText(),
+                    newOrder = new airDeliver(
+                            senderName.getText(),
                             receiverName.getText(),
                             receivedAddress.getText(),
                             Double.parseDouble(distance.getText()),
                             item.getText(),
                             Double.parseDouble(weight.getText()),
-                            date.getValue()); break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type.getValue());
+                            date.getValue()
+                    );
+                    break;
             }
-
-//            getSelectedOrder.setSenderName(senderName.getText());
-//            getSelectedOrder.setReceiverName(receiverName.getText());
-//            getSelectedOrder.setReceivedAddress(receivedAddress.getText());
-//            getSelectedOrder.setType(type.getValue());
-//            getSelectedOrder.setDistance(Double.parseDouble(distance.getText()));
-//            getSelectedOrder.setItem(item.getText());
-//            getSelectedOrder.setWeight(Double.parseDouble(weight.getText()));
-//            getSelectedOrder.setDate(date.getValue());
+            list.remove(getSelectedOrder);
+            list.add(newOrder);
             table.refresh();
 
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setContentText("Cập nhật thành công!!");
             alert.show();
-
+            resetFields();
 
         }
-
-
     }
 
+    // Phần của Nguyễn Sơn Tùng 20198271
+    // hàm xóa order
+    @FXML
+    void deleteOrder(ActionEvent event) {
+        //chọn order từ bảng
+        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
+        if (getSelectedOrder != null) {
+            //check xem có chắc chắn muốn xóa không
+            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có muốn xóa không?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert1.showAndWait();
+
+            //yes thì xóa
+            if (alert1.getResult() == ButtonType.YES) {
+                list.remove(getSelectedOrder);
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Xóa thành công!!");
+                alert.show();
+                resetFields();
+
+            }
+        } else {
+            alert.setAlertType(Alert.AlertType.ERROR);
+            alert.setContentText("Bạn hãy click chọn vào đối tượng cần xóa ở bảng bên!");
+            alert.show();
+            resetFields();
+        }
+    }
+
+
+    // hàm thông kê doanh thu theo tháng hiện tại
+    @FXML
+    void listAction(ActionEvent event) {
+        ObservableList<Order> searchlist = FXCollections.observableArrayList();
+        double sumOfCost = 0;
+
+        // lấy tháng hiện tại
+        LocalDate currentdate = LocalDate.now();
+        Month currentMonth = currentdate.getMonth();
+
+        //duyệt các order từ list xem nếu như tháng của order trùng với tháng hiện tại
+        for (Order ord : list) {
+            warning.setText("");
+            if (ord.getDate().getMonth().equals(currentMonth)) {
+                searchlist.add(ord);
+                //cộng tổng các cost của order
+                sumOfCost += ord.getCost();
+
+            }
+        }
+        //đưa các order thỏa mãn ra table
+        table.setItems(searchlist);
+        resetFields();
+        lbl_sumOfCost.setText("Tổng doanh thu:  " + sumOfCost + " đồng.");
+    }
+
+    // hàm lấy dữ liệu từ dòng đã chọn đưa ra các text field bên trái
     public void selectOrderMouseClicked(MouseEvent mouseEvent) {
-        Order getSelectedOrder = (Order) table.getSelectionModel().getSelectedItem();
+        Order getSelectedOrder = table.getSelectionModel().getSelectedItem();
         if (getSelectedOrder != null) {
             senderName.setText(getSelectedOrder.getSenderName());
             receiverName.setText(getSelectedOrder.getReceiverName());
@@ -268,90 +274,73 @@ public class OrderListController implements Initializable {
             item.setText(getSelectedOrder.getItem());
             weight.setText(String.valueOf(getSelectedOrder.getWeight()));
             date.setValue(getSelectedOrder.getDate());
-
         }
-
-
     }
 
-    // Phần của Đạt NÚT TÌM
+    // Phần của Đàm Tiến Đạt 20198212
+    // hàm tìm order
     @FXML
     void findOrder(ActionEvent event) {
-        ObservableList<Order> searchlist =FXCollections.observableArrayList();
+        ObservableList<Order> searchlist = FXCollections.observableArrayList();
+        //check lựa chọn của combobox
         if (cb_search.getValue() == null) warning.setText("Hãy điền trường cần tìm");
         else {
             switch (cb_search.getValue()) {
+                //thêm order trùng với tên người gửi vào list
                 case "Người gửi":
-                    for (Object or : list) {
+                    for (Order or : list) {
                         warning.setText("");
-                        Order or1 = (Order) or; // duyệt ép kiểu
-                        if (or1.getSenderName().contains(findTextField.getText())) {
-                            searchlist.add(or1);
-                        }
-//                        if(or1.getDate().getMonth().toString().equals("JULY")) System.out.println("dat");
-
+                        if (or.getSenderName().toLowerCase().contains(findTextField.getText().toLowerCase())) searchlist.add(or);
+                        break;
                     }
-                    break;
+                //thêm order trùng với địa chỉ vào list
                 case "Địa chỉ":
-                    for (Object or : list) {
+                    for (Order or : list) {
                         warning.setText("");
-                        Order or1 = (Order) or;
-                        if (or1.getReceivedAddress().contains(findTextField.getText())) searchlist.add(or1);
-
+                        if (or.getReceivedAddress().toLowerCase().contains(findTextField.getText().toLowerCase())) searchlist.add(or);
                     }
                     break;
+                //thêm order có chi phí vận chuyển lớn hơn số nhập vào
                 case "Chi phí vận chuyển":
-                    try {
-                        double cost = Double.parseDouble(findTextField.getText());
+                    if(findTextField.getText() != null)
+                        try {
+                            double cost = Double.parseDouble(findTextField.getText());
 
-                        for (Object or : list) {
-                            warning.setText("");
-                            Order or1 = (Order) or;
+                            for (Order or : list) {
+                                warning.setText("");
+                                if (or.getCost() > cost) searchlist.add(or);
 
-                            if (or1.getCost() > Double.parseDouble(findTextField.getText())) searchlist.add(or1);
-
+                            }
+                        } catch (NumberFormatException e) {
+                            warning.setText("Giá trị không hợp lệ! Mời nhập lại.");
                         }
-                    } catch (NumberFormatException e) {
-                        warning.setText("Giá trị không hợp lệ! Mời nhập lại.");
-                    }
                     break;
 
             }
         }
-
-        table.setItems(searchlist); // hiện lên trên bảng list tìm
-
+        // hiện các order thỏa mãn lên bảng
+        table.setItems(searchlist);
     }
 
-    // PHÀN CỦA ĐẠT
+    //phần code dùng chung
     @FXML
     void refreshAction(ActionEvent event) {
         warning.setText("");
         table.setItems(list);
+        resetFields();
     }
 
-// NÚT THỐNG KÊ DOANH THU
-    @FXML
-    void listAction(ActionEvent event) {
-        ObservableList<Order> searchlist =FXCollections.observableArrayList();
-        LocalDate currentdate = LocalDate.now();
-        Month currentMonth = currentdate.getMonth();
-        double sumOfCost=0;
-        for (Object or : list) {
-            warning.setText("");
-            Order ord = (Order) or; // duyệt ép kiểu
-            if(ord.getDate().getMonth().toString().equals(currentMonth.toString())) {
-                searchlist.add(ord);
-                sumOfCost+=ord.getCost();
-
-            }
-//
-
-        }
-        table.setItems(searchlist);
-        lbl_sumOfCost.setText("Tổng doanh thu:  "+sumOfCost);
-
-
+    // reset các fields
+    public void resetFields(){
+        distance.setText("");
+        item.setText("");
+        receivedAddress.setText("");
+        receiverName.setText("");
+        senderName.setText("");
+        type.setValue(null);
+        date.setValue(null);
+        weight.setText("");
+        findTextField.setText("");
+        lbl_sumOfCost.setText("");
     }
-
 }

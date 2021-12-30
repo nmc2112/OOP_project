@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPane" fx:id="mainPain" prefHeight="762.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project.controllers.OrderListController">
+<AnchorPane id="anchorPane" fx:id="mainPain" prefHeight="762.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_project.controllers.OrderListController">
    <children>
-      <AnchorPane id="anchorPane" layoutX="301.0" layoutY="150.0" prefHeight="488.0" prefWidth="1171.0">
+      <AnchorPane id="anchorPane" layoutX="291.0" layoutY="150.0" prefHeight="488.0" prefWidth="1195.0">
          <children>
-            <TableView fx:id="table" layoutX="-14.0" onMouseClicked="#selectOrderMouseClicked" prefHeight="488.0" prefWidth="1171.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="table" layoutX="-14.0" onMouseClicked="#selectOrderMouseClicked" prefHeight="488.0" prefWidth="1185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="colReceiverName" prefWidth="111.0" text="Người Nhận" />
-                  <TableColumn fx:id="colSenderName" prefWidth="123.0" resizable="false" text="Người Gửi" />
-                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="138.0" resizable="false" text="Địa Chỉ" />
-                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="145.0" resizable="false" text="Ngày Vận Chuyển" />
-                  <TableColumn fx:id="colDistance" prefWidth="134.0" resizable="false" text="Khoảng Cách(km)" />
-                  <TableColumn fx:id="colWeight" prefWidth="106.0" resizable="false" text="Cân Nặng(kg)" />
-                  <TableColumn fx:id="colItem" prefWidth="147.0" text="Mặt Hàng" />
-                  <TableColumn fx:id="colType" prefWidth="139.0" resizable="false" text="Kiểu Vận Chuyển" />
-                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="139.0" resizable="false" text="Tổng Giá Tiền" />
+                <TableColumn fx:id="colReceiverName" prefWidth="135.0" resizable="false" text="Người Nhận" />
+                  <TableColumn fx:id="colSenderName" prefWidth="137.800048828125" resizable="false" text="Người Gửi" />
+                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="192.0" resizable="false" text="Địa Chỉ" />
+                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="121.0" resizable="false" text="Ngày Vận Chuyển" />
+                  <TableColumn fx:id="colDistance" prefWidth="114.0" resizable="false" text="Khoảng Cách(km)" />
+                  <TableColumn fx:id="colWeight" prefWidth="84.0" resizable="false" text="Cân Nặng(kg)" />
+                  <TableColumn fx:id="colItem" prefWidth="112.0" resizable="false" text="Mặt Hàng" />
+                  <TableColumn fx:id="colType" prefWidth="127.0" resizable="false" text="Kiểu Vận Chuyển" />
+                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="171.0" resizable="false" style="-fx-alignment: CENTER-RIGHT;" text="Tổng Giá Tiền(Đồng)" />
               </columns>
             </TableView>
          </children>
@@ -47,6 +47,21 @@
             <Label layoutX="14.0" layoutY="316.0" prefHeight="26.0" prefWidth="93.0" text="Khoảng cách" />
             <Label layoutX="14.0" layoutY="418.0" prefHeight="26.0" prefWidth="93.0" text="Ngày vận chuyển" />
             <DatePicker fx:id="date" layoutX="108.0" layoutY="413.0" prefHeight="31.0" prefWidth="150.0" />
+            <Button fx:id="AddButton" layoutX="1.0" layoutY="463.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="THÊM" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="DeleteButton" layoutX="183.0" layoutY="463.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #c4c41e;" text="XÓA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="UpdateButton1" layoutX="91.0" layoutY="463.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #1087d0;" text="CẬP NHẬT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Button fx:id="btn_find" layoutX="1294.0" layoutY="64.0" mnemonicParsing="false" onAction="#findOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #d01ab5;" text="TÌM KIẾM" textFill="WHITE">
@@ -56,22 +71,10 @@
       </Button>
       <TextField fx:id="findTextField" layoutX="1058.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" />
       <ComboBox fx:id="cb_search" layoutX="827.0" layoutY="64.0" prefHeight="26.0" prefWidth="224.0" promptText="Tìm kiếm theo" />
-      <Label fx:id="warning" layoutX="827.0" layoutY="101.0" prefHeight="21.0" prefWidth="343.0" textFill="RED" />
-      <Button fx:id="AddButton" layoutX="209.0" layoutY="544.0" mnemonicParsing="false" onAction="#addOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="THÊM" textFill="WHITE">
+      <Label fx:id="warning" layoutX="827.0" layoutY="110.0" prefHeight="21.0" prefWidth="343.0" textFill="RED">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="DeleteButton" layoutX="116.0" layoutY="544.0" mnemonicParsing="false" onAction="#deleteOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #c4c41e;" text="XÓA" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="UpdateButton1" layoutX="25.0" layoutY="544.0" mnemonicParsing="false" onAction="#updateOrder" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #1087d0;" text="CẬP NHẬT" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
+            <Font size="14.0" />
+         </font></Label>
       <Button fx:id="btn_refresh" layoutX="1392.0" layoutY="64.0" mnemonicParsing="false" onAction="#refreshAction" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: green;" text="TẢI LẠI" textFill="#f4f2f2">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -82,6 +85,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btn_list" layoutX="1301.0" layoutY="99.0" mnemonicParsing="false" onAction="#listAction" text="Thống kê" />
+      <Button fx:id="btn_list" layoutX="1294.0" layoutY="107.0" mnemonicParsing="false" onAction="#listAction" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: orange;" text="THỐNG KÊ" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

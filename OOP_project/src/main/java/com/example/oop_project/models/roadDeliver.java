@@ -4,10 +4,6 @@ import java.time.LocalDate;
 
 public class roadDeliver extends Order {
 
-	public roadDeliver(){
-
-	}
-
 	public roadDeliver( String senderName, String receiverName, String receivedAddress, double distance, String item,
 					   double weight, LocalDate date) {
 		super(senderName, receiverName, receivedAddress, distance, item, weight, date);

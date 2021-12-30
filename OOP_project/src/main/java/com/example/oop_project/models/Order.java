@@ -8,7 +8,7 @@ public class Order {
 	private String receiverName;
 	private String receivedAddress;
 	private double distance;
-	private double cost = 0;
+	private double cost;
 	private double weight;
 	private String item;
 	private String type;
@@ -26,12 +26,6 @@ public class Order {
 		this.weight = weight;
 		this.date = date;
 	}
-	
-	
-	public Order() {
-		super();
-	}
-
 
 	public String getItem() {
 		return item;
@@ -77,27 +71,10 @@ public class Order {
 	}
 	public LocalDate getDate() {return date;}
 	public void setDate(LocalDate date) {this.date = date;}
-
 	public String getType() {
 		return type;
 	}
-
-	public void setType(String type) {
-		if(type == "Đường Bộ"){
-			this.setCost(this.getDistance() * 20000 + this.getWeight() * 5000);
-		}else {
-			this.setCost(this.getDistance() * 100000 + this.getWeight() * 100000 + 200000);
-		}
-		this.type = type;
-	}
-
-	public double calculateCost(String type){
-		switch (type){
-			case "Đường Bộ": return this.getDistance() * 20000 + this.getWeight() * 5000;
-			case "Hàng Không": return this.getDistance() * 100000 + this.getWeight() * 100000 + 200000;
-			default: return 0;
-		}
-	}
+	public void setType(String type) { this.type = type;}
 
 	public double calCost(){
 		return 0;
