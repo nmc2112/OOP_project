@@ -214,21 +214,37 @@ public class OrderListController implements Initializable {
             alert.setContentText("Bạn hãy click chọn vào đối tượng cần cập nhật ở bảng bên!");
             alert.show();
         } else {
-
-            getSelectedOrder.setSenderName(senderName.getText());
-            getSelectedOrder.setReceiverName(receiverName.getText());
-            getSelectedOrder.setReceivedAddress(receivedAddress.getText());
-            getSelectedOrder.setType(type.getValue());
-            getSelectedOrder.setDistance(Double.parseDouble(distance.getText()));
-            getSelectedOrder.setItem(item.getText());
-            getSelectedOrder.setWeight(Double.parseDouble(weight.getText()));
             switch (type.getValue()){
                 case "Đường Bộ":
-                    getSelectedOrder.setCost(getSelectedOrder.calculateCost("Đường Bộ")); break;
+                    getSelectedOrder = new roadDeliver(
+                            senderName.getText(),
+                            receiverName.getText(),
+                            receivedAddress.getText(),
+                            Double.parseDouble(distance.getText()),
+                            item.getText(),
+                            Double.parseDouble(weight.getText()),
+                            date.getValue()
+                        ); break;
                 case "Hàng Không":
-                    getSelectedOrder.setCost(getSelectedOrder.calculateCost("Hàng Không")); break;
+                    getSelectedOrder = new airDeliver (senderName.getText(),
+                            receiverName.getText(),
+                            receivedAddress.getText(),
+                            Double.parseDouble(distance.getText()),
+                            item.getText(),
+                            Double.parseDouble(weight.getText()),
+                            date.getValue()); break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type.getValue());
             }
-            getSelectedOrder.setDate(date.getValue());
+
+//            getSelectedOrder.setSenderName(senderName.getText());
+//            getSelectedOrder.setReceiverName(receiverName.getText());
+//            getSelectedOrder.setReceivedAddress(receivedAddress.getText());
+//            getSelectedOrder.setType(type.getValue());
+//            getSelectedOrder.setDistance(Double.parseDouble(distance.getText()));
+//            getSelectedOrder.setItem(item.getText());
+//            getSelectedOrder.setWeight(Double.parseDouble(weight.getText()));
+//            getSelectedOrder.setDate(date.getValue());
             table.refresh();
 
             alert.setAlertType(Alert.AlertType.INFORMATION);

@@ -98,4 +98,8 @@ public class Order {
 			default: return 0;
 		}
 	}
+
+	public double calCost(){
+		return 0;
+	}
 }
