@@ -15,7 +15,7 @@ public class Order {
 	private LocalDate date;
 	
 	
-	public Order(String senderName, String receiverName, String receivedAddress, double distance,String item,
+	public Order(String senderName, String receiverName, String receivedAddress, double distance, String item,
 			double weight, LocalDate date) {
 		super();
 		this.item = item;

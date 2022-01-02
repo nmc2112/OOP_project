@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 import java.util.*;
 
 public class OrderListController implements Initializable {
@@ -84,11 +85,11 @@ public class OrderListController implements Initializable {
 
         //init table
         list = FXCollections.observableArrayList(
-            new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 7, 25)),
-            new roadDeliver("Nguyễn Minh Ngọc", "Đàm Tiến Đạt", "Hà Nội", 10, "Hàng", 6, LocalDate.of(2021, 12, 25)),
-            new roadDeliver("Lương Phương Linh", "Đàm Tiến Đạt", "Nha Trang", 10, "Hàng", 6, LocalDate.of(2021, 12, 11)),
+            new roadDeliver("Nguyễn Minh Châu", "Đàm Tiến Đạt", "15 ngõ 142 Nguyễn Ngọc Nại, Hà Nội", 10, "Kẹo", 6, LocalDate.of(2021, 7, 25)),
+            new roadDeliver("Nguyễn Minh Ngọc", "Nguyễn Võ Trí", "1805B tòa nhà Rivera Park, Hà Nội", 10, "Nước ngọt", 6, LocalDate.of(2022, 1, 25)),
+            new roadDeliver("Lại Dương Phương Linh", "Trần Ngọc Bách", "2501 tòa nhà Hinode City, Hà Nội", 10, "Rượu", 6, LocalDate.of(2022, 1, 11)),
 
-            new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "Đà Nẵng", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
+            new airDeliver("Nguyễn Ngọc Khánh", "Nguyễn Sơn Tùng", "17 ngõ 92 Mai Động, Hà Nội", 20, "Bim Bim", 7, LocalDate.of(2021, 8, 25)
 
             ));
         colCost.setCellValueFactory(new PropertyValueFactory<>("cost"));
@@ -109,8 +110,6 @@ public class OrderListController implements Initializable {
     public void addOrder(ActionEvent actionEvent) {
         //check rỗng
         if (checkNull()) return;
-
-        //check text field là số hay chữ
 
         //thêm order dựa theo type là đường bộ hay hàng không
         switch (type.getValue()) {
@@ -142,8 +141,6 @@ public class OrderListController implements Initializable {
         } else {
             //check rỗng
             if (checkNull()) return;
-
-            //check text field là số hay chữ
 
             //xóa đối tượng cũ từ bảng và thêm đối tượng mới với các trường đã được sửa từ đối tượng cũ bị xóa
             Order newOrder = null;
@@ -183,6 +180,7 @@ public class OrderListController implements Initializable {
         }
     }
 
+    //check các trường bị null
     private boolean checkNull() {
         if (senderName.getText() == ""
                 || receiverName.getText() == ""
@@ -235,14 +233,14 @@ public class OrderListController implements Initializable {
         ObservableList<Order> searchlist = FXCollections.observableArrayList();
         double sumOfCost = 0;
 
-        // lấy tháng hiện tại
+        // lấy tháng và năm hiện tại
         LocalDate currentdate = LocalDate.now();
         Month currentMonth = currentdate.getMonth();
-
-        //duyệt các order từ list xem nếu như tháng của order trùng với tháng hiện tại
+        int currentYear = currentdate.getYear();
+        //duyệt các order từ list xem nếu như tháng năm của order trùng với tháng năm hiện tại
         for (Order ord : list) {
             warning.setText("");
-            if (ord.getDate().getMonth().equals(currentMonth)) {
+            if (ord.getDate().getMonth().equals(currentMonth) && ord.getDate().getYear() == currentYear) {
                 searchlist.add(ord);
                 //cộng tổng các cost của order
                 sumOfCost += ord.getCost();
@@ -284,8 +282,8 @@ public class OrderListController implements Initializable {
                     for (Order or : list) {
                         warning.setText("");
                         if (or.getSenderName().toLowerCase().contains(findTextField.getText().toLowerCase())) searchlist.add(or);
-                        break;
                     }
+                    break;
                 //thêm order trùng với địa chỉ vào list
                 case "Địa chỉ":
                     for (Order or : list) {

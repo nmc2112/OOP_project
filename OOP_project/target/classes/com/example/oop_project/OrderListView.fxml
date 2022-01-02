@@ -16,15 +16,15 @@
          <children>
             <TableView fx:id="table" layoutX="-14.0" onMouseClicked="#selectOrderMouseClicked" prefHeight="488.0" prefWidth="1185.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="colReceiverName" prefWidth="135.0" resizable="false" text="Người Nhận" />
                   <TableColumn fx:id="colSenderName" prefWidth="137.800048828125" resizable="false" text="Người Gửi" />
-                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="192.0" resizable="false" text="Địa Chỉ" />
-                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="121.0" resizable="false" text="Ngày Vận Chuyển" />
-                  <TableColumn fx:id="colDistance" prefWidth="114.0" resizable="false" text="Khoảng Cách(km)" />
-                  <TableColumn fx:id="colWeight" prefWidth="84.0" resizable="false" text="Cân Nặng(kg)" />
-                  <TableColumn fx:id="colItem" prefWidth="112.0" resizable="false" text="Mặt Hàng" />
-                  <TableColumn fx:id="colType" prefWidth="127.0" resizable="false" text="Kiểu Vận Chuyển" />
-                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="171.0" resizable="false" style="-fx-alignment: CENTER-RIGHT;" text="Tổng Giá Tiền(Đồng)" />
+                <TableColumn fx:id="colReceiverName" prefWidth="135.0" resizable="false" text="Người Nhận" />
+                  <TableColumn fx:id="colReceivedAddress" minWidth="4.0" prefWidth="220.0" resizable="false" text="Địa Chỉ" />
+                  <TableColumn fx:id="colDate" minWidth="4.0" prefWidth="123.0" resizable="false" text="Ngày Vận Chuyển" />
+                  <TableColumn fx:id="colDistance" prefWidth="123.0" resizable="false" text="Khoảng Cách(km)" />
+                  <TableColumn fx:id="colWeight" prefWidth="102.0" resizable="false" text="Cân Nặng(kg)" />
+                  <TableColumn fx:id="colItem" prefWidth="101.0" resizable="false" text="Mặt Hàng" />
+                  <TableColumn fx:id="colType" prefWidth="119.0" resizable="false" text="Kiểu Vận Chuyển" />
+                  <TableColumn fx:id="colCost" minWidth="0.0" prefWidth="133.0" resizable="false" style="-fx-alignment: CENTER-RIGHT;" text="Tổng Giá Tiền (Đồng)" />
               </columns>
             </TableView>
          </children>
@@ -80,7 +80,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label fx:id="lbl_sumOfCost" layoutX="1247.0" layoutY="655.0" prefHeight="18.0" prefWidth="224.0" textFill="#f20d0d">
+      <Label fx:id="lbl_sumOfCost" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="1031.0" layoutY="655.0" prefHeight="20.0" prefWidth="440.0" textAlignment="RIGHT" textFill="#f20d0d">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
